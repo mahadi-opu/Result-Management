@@ -1,12 +1,14 @@
+
 /**
- * Send Data to LS
+ * Send Data to Local Storage
  */
 const sendDataLS = (key, data) => {
     localStorage.setItem(key, JSON.stringify(data));
   };
   
+
 /**
- * Get Data from LS
+ * Get Data from Local Storage
  */
 const getDataLS = (key) => {
     if (localStorage.getItem(key)) {
@@ -14,7 +16,6 @@ const getDataLS = (key) => {
     }
     return [];
   };
-
 
 
 /**
@@ -25,6 +26,8 @@ const createAlert = (msg, type = "danger") => {
         <button class="btn-close" data-bs-dismiss="alert"> </button>
     </p>`
 };
+
+
 /**
  * Number Check
  */
@@ -32,6 +35,7 @@ const isNumber = (num) => {
     const pattern = /^[0-9]{6,}$/;
     return pattern.test(num);
   };
+
 
  /**
  * Time Ago
@@ -63,3 +67,24 @@ const timeAgo = (timestamp) => {
       return `${Math.floor(timeElapsed / YEAR)} years ago`;
     }
   };
+
+ /**
+ * Create a random ID 
+ */
+
+ const generateRandomUniqueID = (length = 10) => {
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  const characterCount = characters.length;
+  let result = '';
+
+  while (result.length < length) {
+    const randomBytesArray = new Uint8Array(8); // 8 bytes = 64 bits
+    window.crypto.getRandomValues(randomBytesArray);
+    for (let i = 0; i < randomBytesArray.length && result.length < length; i++) {
+      const randomIndex = randomBytesArray[i] % characterCount;
+      result += characters.charAt(randomIndex);
+    }
+  }
+
+  return result;
+}

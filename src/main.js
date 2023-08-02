@@ -1,10 +1,10 @@
 const student_create_form = document.getElementById("student_create_form");
 const msg = document.querySelector(".msg");
 const all_student_list = document.querySelector(".all-student-list");
+const singleStudent = document.querySelector(".view-single-student");
 
 
 // Submit Student Create Form 
-
 student_create_form.onsubmit = (e) => {
     // DATA Load OFF
     e.preventDefault();
@@ -22,13 +22,26 @@ student_create_form.onsubmit = (e) => {
         msg.innerHTML = createAlert(" Invalid Reg Number ");
     } else {
         const oldStudentsData = getDataLS("students");
+        
+        // Check roll Number 
+        if (oldStudentsData.some((item) => item.roll === data.roll)) {
+            msg.innerHTML = createAlert(" Roll already Exists");
+            return;
+        }
+
+          // Check roll Number 
+          if (oldStudentsData.some((item) => item.reg === data.reg)) {
+            msg.innerHTML = createAlert(" Reg already Exists");
+            return;
+        }
+
         oldStudentsData.push({
             ...data,                                         // তিনটা ডট কেন নিয়েছি ?
             result: null,
             createdAt : Date.now(),
+            id : generateRandomUniqueID(25),
         });
         sendDataLS("students", oldStudentsData);
-
         // DATA Reset 
         e.target.reset();
 
@@ -41,12 +54,9 @@ student_create_form.onsubmit = (e) => {
 };
 
 
-
 // Show All Students
 const getStudents = () => {
     const students = getDataLS("students");
-
-    console.log(students);
 
     let content = "";
     if (students.length > 0) {
@@ -74,7 +84,7 @@ const getStudents = () => {
                     </button>
                 <td> 
                     <button class="btn btn-sm btn-info" data-bs-toggle="modal" 
-                    data-bs-target="#show_single_stident_modal" onclick="showSingleStudent(${ student.roll }')"> 
+                    data-bs-target="#view_single_student_modal" onclick="viewSingleStudent('${ student.roll }')"> 
                         <i class="fa-solid fa-eye"></i>
                     </button>
                     <button class="btn btn-sm btn-warning"> 
@@ -94,9 +104,13 @@ const getStudents = () => {
         `
     }
     all_student_list.innerHTML = content;
-};
-getStudents();
+};getStudents();
 
+
+// Edit student
+const editStudent = (id) => {
+    console.log(id)
+}
 
 // delete student
 const deleteStudent = (roll) => {
@@ -110,9 +124,24 @@ const deleteStudent = (roll) => {
     } else {
       alert("your data safe");
     }
+
 };
 
-// Show student
-const showSingleStudent = (roll) => {
-    alert(roll);
+// View student 
+const viewSingleStudent = (roll) => {
+
+    const allStudent = getDataLS("students");
+    console.log(allStudent);
+    const oneStudent = allStudent.find((student) => student.roll === roll);
+    singleStudent.innerHTML = `
+        <img 
+            src="${oneStudent.photo}" 
+            alt=""
+            class="shadow mb-5 mx-auto"
+            style="width: 50%; border-radius: 10px;"
+        >
+        <h6> Name: ${oneStudent.name} </h6>
+        <P> Roll No:${oneStudent.roll} | Regg No: ${oneStudent.reg} </P>
+`
 };
+
