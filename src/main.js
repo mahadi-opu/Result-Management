@@ -1,6 +1,7 @@
 const student_create_form = document.getElementById("student_create_form");
 const student_edit_form = document.getElementById("student_edit_form");
-const student_result_modal = document.getElementById("student_result_modal");
+const student_result_form = document.getElementById("student_result_form");
+const student_edit_result_form = document.getElementById("student_edit_result_form");
 
 const msg = document.querySelector(".msg");
 const msgEdit = document.querySelector(".msg-edit");
@@ -89,8 +90,8 @@ const getStudents = () => {
                 <td> 
 
                     ${ student.result === null 
-                          ? '<button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#student_result_modal" onclick="addResult(' + student.id +')"> Add result </button>'
-                          : '<button class="btn btn-sm btn-warning"> View Result </button>'
+                          ? `<button class="btn btn-sm btn-success rounded-0" data-bs-toggle="modal" data-bs-target="#student_result_modal" onclick="addResult('${student.id}')"> Add Marks </button>`
+                          : `<button class="btn btn-sm btn-warning rounded-0" data-bs-toggle="modal" data-bs-target="#student_edit_result_modal" onclick="editResult('${student.id}')" > View Marks </button>`
                     }
 
                 </td>
@@ -198,7 +199,59 @@ student_edit_form.onsubmit = e => {
 
 // Add Result
 const addResult = (id) => {
-    alert(id);
+  student_result_form.querySelector('input[name="id"]').value = id ;
 }
 
-// Submit Student Add Result
+// Student Result Form Submit
+student_result_form.onsubmit = (e) => {
+  e.preventDefault();
+
+  const form_data = new FormData(e.target);
+  const data = Object.fromEntries(form_data.entries());
+
+  // Get Data with localStorage
+  const oldStudentsData = getDataLS("students");
+
+  oldStudentsData[oldStudentsData.findIndex(item=> item.id === data.id)] = {
+    ...oldStudentsData[oldStudentsData.findIndex(item=> item.id === data.id)],
+    result: data,
+  };
+
+  sendDataLS("students", oldStudentsData);
+  getStudents();
+
+  e.target.reset();
+}
+
+// Edit Result 
+const editResult = (id) => {
+  const data = getDataLS("students");
+  const editResultData = data.find((item) => item.id === id);
+
+  student_edit_result_form.querySelector('input[placeholder="Bangla"]').value = editResultData.result.bangla;
+  student_edit_result_form.querySelector('input[placeholder="English"]').value = editResultData.result.english;
+  student_edit_result_form.querySelector('input[placeholder="Math"]').value = editResultData.result.math;
+  student_edit_result_form.querySelector('input[placeholder="Arabic"]').value = editResultData.result.arabic;
+  student_edit_result_form.querySelector('input[placeholder="Religion"]').value = editResultData.result.religion;
+  student_edit_result_form.querySelector('input[placeholder="Social Science"]').value = editResultData.result.social_science;
+  student_edit_result_form.querySelector('input[placeholder="ID"]').value = id;
+  
+}
+
+// Edit Mark Result Form Submit 
+student_edit_result_form.onsubmit = (e) => {
+  e.preventDefault();
+
+  const form_data = new FormData(e.target);
+  const data = Object.fromEntries(form_data.entries());
+
+  const oldStudentsData = getDataLS("students");
+  oldStudentsData[oldStudentsData.findIndex( item => item.id === data.id )] = {
+    ...oldStudentsData[oldStudentsData.findIndex( item => item.id === data.id )],
+    result : data,
+  };
+
+  sendDataLS("students", oldStudentsData);
+  getStudents();
+  // e.target.reset();
+}

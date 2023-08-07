@@ -10,10 +10,106 @@
   <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 <body>
-    
-    <h2> This is our Admin project</h2>
+
+  <div class="container my-5">
+    <div class="row justify-content-center">
+      <div class="col-md-5 my-5">
+       
+        <a href="./admin.html" class="btn btn-warning mb-3 shadow rounded-0"> Admin Panel  </a>
+        <div class="card shadow border-0 rounded-0">
+          <div class="card-header">
+            <h2> Search Student Result </h2>
+          </div>
+          <div class="card-body px-5 py-5">
+              <form id="search_result_form">
+                <div class="my-3">
+                  <input type="text" class="form-control rounded-0" placeholder="Roll" name="roll">
+                </div>
+                <div class="my-3">
+                  <input type="text" class="form-control rounded-0" placeholder="Ragistation" name="reg">
+                </div>
+                <div class="my-4">
+                    <button class="btn btn-success rounded-0" type="submit"> Search </button>
+                </div>
+              </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="container my-5">
+    <div class="row justify-content-center">
+      <div class="col-md-10 my-5">
+        <div class="card shadow border-0 rounded-0">
+          <div class="card-header">
+            <h2> Student Result </h2>
+          </div>
+          <div class="card-body px-5 py-5">
+            <div class="student-info">
+              <img src="" alt="">
+              <h3> Mahadi Hasan  </h3>
+              <p> <b> Roll: </b>323234 | <b> Registation No: </b> 434567567  </p>
+            </div>
+            <table class="table table-bordered">
+                <tr>
+                    <th> Subject </th>
+                    <th> Marks </th>
+                    <th> GPA </th>
+                    <th> Grade </th>
+                    <th> CGPA </th>
+                    <th> Final Result </th>
+                </tr>
+                  <tr>
+                      <td> Bangla </td>
+                      <td> 66 </td>
+                      <td> A+ </td>
+                      <td> 5</td>
+                      <td rowspan="6" align="center" class="col align-self-center"> A+ </td>
+                      <td rowspan="6" align="center" item="center"> 5 </td>
+                </tr>
+                <tr>
+                    <td> English </td>
+                    <td> 66 </td>
+                    <td> A+ </td>
+                    <td> 5</td>
+                </tr>
+                <tr>
+                    <td> Math </td>
+                    <td> 66 </td>
+                    <td>  A+ </td>
+                    <td> 5</td>
+                </tr>
+                <tr>
+                    <td> Arabic </td>
+                    <td> 66 </td>
+                    <td> A+ </td>
+                    <td> 5</td>
+                </tr>
+                <tr>
+                    <td> Social Science  </td>
+                    <td> 66 </td>
+                    <td>  A+  </td>
+                    <td> 5</td>
+                </tr>
+                <tr>
+                    <td> Religion </td>
+                    <td> 66 </td>
+                    <td>  A+  </td>
+                    <td> 5</td>
+                </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   
   <!-- Bootstrap JS (Optional, if you need dropdowns, popovers, etc.) -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="src/data.js"></script>
+  <script src="src/functions.js"></script>
+  <script src="src/main.js"></script>
+  <script src="src/search.js"></script>
 </body>
 </html>

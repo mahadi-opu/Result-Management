@@ -23,12 +23,14 @@
       <div class="row justify-content-center">
         <div class="col-md-10 my-10">
           <button
-            class="btn btn-primary mb-4"
+            class="btn btn-primary mb-3 rounded-0"
             data-bs-target="#add_new_student_modal"
             data-bs-toggle="modal"
           >
             Add New Student
           </button>
+          <a href="./index.html" class="btn btn-warning mb-3 rounded-0"> Search Result </a>
+
           <div class="card shadow border-0">
             <div class="card-body">
               <table class="table table-striped">
@@ -44,7 +46,9 @@
                     <th>Action</th>
                   </tr>
                 </thead>
-                <tbody class="all-student-list"></tbody>
+                <tbody class="all-student-list">
+                    <!-- Main.js -->
+                </tbody>
               </table>
             </div>
           </div>
@@ -96,7 +100,6 @@
                   name="photo"
                 />
               </div>
-
               <div class="my-2 d-flex">
                 <button type="submit" class="btn btn-success w-50 m-1">
                   Create
@@ -137,7 +140,7 @@
             <form id="student_edit_form">
               <div class="my-2">
                 <input
-                  type="hidden"
+                  type="text"
                   class="form-control"
                   placeholder="id"
                   name="id"
@@ -195,7 +198,7 @@
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header">
-              <h2> Add Result </h2>
+              <h2> Add Mark </h2>
               <button class="btn-close" data-bs-dismiss="modal"></button>
             </div>
   
@@ -207,7 +210,7 @@
                     type="text"
                     class="form-control"
                     placeholder="Bangla"
-                    name="ban"
+                    name="bangla"
                   />
                 </div>
                 <div class="my-2">
@@ -215,7 +218,15 @@
                     type="text"
                     class="form-control"
                     placeholder="English"
-                    name="eng"
+                    name="english"
+                  />
+                </div>
+                <div class="my-2">
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Math"
+                    name="math"
                   />
                 </div>
                 <div class="my-2">
@@ -223,7 +234,7 @@
                     type="text"
                     class="form-control"
                     placeholder="Arabic"
-                    name="ara"
+                    name="arabic"
                   />
                 </div>
                 <div class="my-2">
@@ -231,15 +242,23 @@
                     type="text"
                     class="form-control"
                     placeholder="Social Science "
-                    name="social"
+                    name="social_science"
                   />
                 </div>
                 <div class="my-2">
                   <input
                     type="text"
                     class="form-control"
-                    placeholder="Religias"
-                    name="rel"
+                    placeholder="Religion"
+                    name="religion"
+                  />
+                </div>
+                <div class="my-2">
+                  <input
+                    type="hidden"
+                    class="form-control"
+                    placeholder="ID"
+                    name="id"
                   />
                 </div>
                 <div class="my-3">
@@ -255,7 +274,93 @@
             <div class="modal-footer"></div>
           </div>
         </div>
-     </div>
+    </div>
+
+    <!-- // Edit student Modal -->
+    <div class="modal fade" id="student_edit_result_modal">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2> Edit Mark </h2>
+            <button class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+
+          <div class="modal-body text-center">
+            <div class="msg-result"></div>
+            <form id="student_edit_result_form">
+              <div class="my-2">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Bangla"
+                  name="bangla"
+                />
+              </div>
+              <div class="my-2">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="English"
+                  name="english"
+                />
+              </div>
+              <div class="my-2">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Math"
+                  name="math"
+                />
+              </div>
+              <div class="my-2">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Arabic"
+                  name="arabic"
+                />
+              </div>
+              <div class="my-2">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Social Science"
+                  name="social_science"
+                />
+              </div>
+              <div class="my-2">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Religion"
+                  name="religion"
+                />
+              </div>
+              <div class="my-2">
+                <input
+                  type="hidden"
+                  class="form-control"
+                  placeholder="ID"
+                  name="id"
+                />
+              </div>
+              <div class="my-3">
+                <img id="previewPhoto" src="" class="w-100" alt="" />
+              </div>
+              <div class="my-2 d-flex">
+                <button type="submit" class="btn btn-success w-100 m-1">
+                  Update
+                </button>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer"></div>
+        </div>
+      </div>
+    </div>
+
+
+
 
     <!-- Bootstrap JS (Optional, if you need dropdowns, popovers, etc.) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
